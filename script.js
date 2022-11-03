@@ -4,10 +4,7 @@ const taskName = document.querySelector('.taskName');
 const taskDescritpion = document.querySelector('.taskDescription');
 const taskDate = document.querySelector('.taskDate');
 const taskLabel = document.querySelector('.taskLabel');
-let tasksNames = [];
-let tasksDescritpions = [];
-let tasksDates = [];
-let tasksLabels = [];
+let tasks = [];
 let taskNumber = 0;
 let columnToSort = 0;
 
@@ -27,14 +24,15 @@ const taskCreator = () => {
     const taskCurrent = document.createElement('p');
     const timeCurrent = Date.now();
     let remainTime = Date();
-    tasksNames[taskNumber] = taskName.value;
-    tasksDescritpions[taskNumber] = taskDescritpion.value;
-    tasksDates[taskNumber] = taskDate.value;
-    tasksLabels[taskNumber] = taskLabel.value;
-    remainTime = Math.ceil((Date.parse(tasksDates[taskNumber]) - timeCurrent)/1000/60/60/24);
+
+    remainTime = Math.ceil((Date.parse(taskDate.value) - timeCurrent) / 1000 / 60 / 60 / 24);
     
-    taskCurrent.textContent = `${taskNumber} :${tasksNames[taskNumber]} ${tasksDescritpions[taskNumber]} ${tasksDates[taskNumber]} ${tasksLabels[taskNumber]} il vous reste ${remainTime} jours`;
+    tasks[taskNumber] = [taskNumber, taskName.value, taskDescritpion.value, taskDate.value, taskLabel.value, remainTime ]
+    
+    taskCurrent.textContent = `${tasks[taskNumber][0]} :${tasks[taskNumber][1]} ${tasks[taskNumber][2]} ${tasks[taskNumber][3]} ${tasks[taskNumber][4]} il vous reste ${tasks[taskNumber][5]} jours`;
+
     taskOutput.append(taskCurrent);
+    
     taskNumber++;
 }
 
